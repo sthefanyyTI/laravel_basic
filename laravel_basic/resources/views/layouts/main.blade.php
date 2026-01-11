@@ -37,17 +37,35 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Eventos</a>
+                        <a href="/" class="nav-link">Salas</a>
                     </li>
                     <li class="nav-item">
                         <a href="/salas/create" class="nav-link">Criar Salas</a>
                     </li>
+                    @auth 
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Entrar</a>
+                        <a href="/dashboard" class="nav-link">Minhas Salas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}"
+                            class="nav-link"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            Sair
+                        </a>
+                        </form>
                     </li>
+                    @endauth
+
+                    @guest
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link">Cadastrar</a>
+                    </li>
+                    @endguest
                 </ul>
             </div>
 
