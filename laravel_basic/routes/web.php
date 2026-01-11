@@ -5,7 +5,7 @@ use App\Http\Controllers\SalaController;
 
 Route::get('/', [SalaController::class, 'index']);
 
-Route::get('/salas/create', [SalaController::class, 'create']);
+Route::get('/salas/create', [SalaController::class, 'create'])->middleware('auth');
 
 Route::get('/salas/{id}', [SalaController::class, 'show']);
 

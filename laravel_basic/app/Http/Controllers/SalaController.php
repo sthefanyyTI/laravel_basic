@@ -62,6 +62,9 @@ public function index()
 
         $sala->image = $imageName;
     }
+    
+    $user = auth()->user();
+    $sala->user_id = $user->id;
 
     $sala->save();
 

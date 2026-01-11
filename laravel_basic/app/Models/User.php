@@ -64,4 +64,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function salas() {
+        return $this->hasMany('App\Models\Salas');
+    }
+
 }

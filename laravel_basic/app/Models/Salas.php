@@ -24,5 +24,9 @@ class Salas extends Model
     ];
 
     protected $date = ['date'];
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }
 
