@@ -22,5 +22,7 @@ class Salas extends Model
     protected $casts = [
         'itens' => 'array',  // converte automaticamente para array JSON
     ];
+
+    protected $date = ['date'];
 }
 

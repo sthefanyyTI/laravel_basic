@@ -10,19 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+{
         Schema::table('salas', function (Blueprint $table) {
-            $table->string('image')->nullable();
+            $table->dateTime('date')->nullable();
         });
-    }
+}
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
-    {
+{
         Schema::table('salas', function (Blueprint $table) {
-            $table->dropColumn('image');
+            $table->dropColumn('date');
         });
-    }
+}
+
 };

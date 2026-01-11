@@ -26,7 +26,7 @@
             <div class="card col-md-3">
                 <img src="/img/salas/{{ $sala->image }}" class="card-img-topalt="{{ $sala->title }}">
                 <div class="card-body">
-                    <p class="card-date">10/01/2026</p>
+                    <p class="card-date">{{ date('d/m/y', strtotime($sala->date)) }}</p>
                     <h5 class="card-sala">{{ $sala->name }}</h5>
                     <a href="/salas/{{ $sala->id }}" class="btn btn-primary">Saber mais</a>
                 </div>

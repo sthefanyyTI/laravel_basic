@@ -40,6 +40,7 @@ public function index()
     $sala = new Salas;
 
     $sala->name = $request->name;
+    $sala->date = $request->date;
     $sala->qty = $request->qty;
     $sala->description = $request->description ?: '';
     $sala->itens = $request->itens;

@@ -19,6 +19,11 @@
         </div>
 
         <div class="form-group">
+            <label for="date">Data:</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+
+        <div class="form-group">
             <label for="qty">Quantidade:</label>
             <input type="text" class="form-control" id="qty" name="qty" placeholder="Quantidade">
         </div>
