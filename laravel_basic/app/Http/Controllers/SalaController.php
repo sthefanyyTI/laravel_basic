@@ -8,13 +8,28 @@ use App\Models\Salas;
 class SalaController extends Controller
 {
 
-    public function index(){
-        $salas = Salas::all();
+public function index()
+{
+    $search = request('search');
 
-        return view('welcome', [
-            'salas' => $salas
-        ]);
+    if ($search) {
+        // Remover espaços extras no início e no fim da busca
+        $search = trim($search);
+
+        // Buscar pelo campo 'name' em vez de 'title'
+        $salas = Salas::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%'])->get();
+    } else {
+        $salas = Salas::all();
     }
+
+    return view('welcome', [
+        'salas' => $salas,
+        'search' => $search
+    ]);
+}
+
+
+
 
     public function create(){
         return view('salas.create');
@@ -26,7 +41,7 @@ class SalaController extends Controller
 
     $sala->name = $request->name;
     $sala->qty = $request->qty;
-    $sala->description = $request->description;
+    $sala->description = $request->description ?: '';
     $sala->itens = $request->itens;
 
 
@@ -57,8 +72,9 @@ public function show(int $id){
     
     $sala = Salas::findOrFail($id);
 
-    return view('salas.show', [
-        'sala' => $sala
-    ]);
+    $sala->items = explode(',', $sala->items); // Transforma a string em um array
+
+    return view('salas.show', ['sala' => $sala]);
+
 }
 }
