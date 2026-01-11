@@ -62,7 +62,7 @@ public function index()
 
         $sala->image = $imageName;
     }
-    
+
     $user = auth()->user();
     $sala->user_id = $user->id;
 
@@ -81,4 +81,13 @@ public function show(int $id){
     return view('salas.show', ['sala' => $sala]);
 
 }
+
+public function dashboard()
+{
+    $user = auth()->user();
+    $salas = $user->salas;
+
+    return view('salas.dashboard', ['salas' => $salas]);
+}
+
 }
