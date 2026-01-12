@@ -82,12 +82,18 @@ public function show(int $id){
 
 }
 
-public function dashboard()
-{
+public function dashboard() {
     $user = auth()->user();
     $salas = $user->salas;
 
     return view('salas.dashboard', ['salas' => $salas]);
 }
+
+public function destroy($id) {
+    Salas::findOrFail($id)->delete();
+
+    return redirect('/dashboard')->with('msg', 'Sala excluída com sucesso!');
+}
+
 
 }

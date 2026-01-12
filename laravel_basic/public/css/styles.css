@@ -133,6 +133,10 @@ header{
     width: 25%;
 }
 
+.dashboard-salas-container form {
+    display: inline-block;
+}
+
 footer{
     text-align: center;
     background-color: #353e48;

@@ -13,6 +13,8 @@ Route::get('/salas/{id}', [SalaController::class, 'show']);
 
 Route::post('/salas', [SalaController::class, 'store']);
 
+Route::delete('/salas/{id}', [SalaController::class, 'destroy']);
+
 Route::get('/contatos', function () {
     return view('contact');
 });

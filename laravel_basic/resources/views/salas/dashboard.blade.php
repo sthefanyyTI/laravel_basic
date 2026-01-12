@@ -27,8 +27,12 @@
                 </td>
                 <td>0</td>
                 <td>
-                    <a href="#">Editar</a> |
-                    <a href="#">Deletar</a>
+                    <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon>Editar</a>
+                    <form action="/salas/{{ $sala->id }}" method="POST">
+                        @csrf 
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon> Deletar</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
