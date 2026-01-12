@@ -90,10 +90,45 @@ public function dashboard() {
 }
 
 public function destroy($id) {
+
     Salas::findOrFail($id)->delete();
 
     return redirect('/dashboard')->with('msg', 'Sala excluída com sucesso!');
 }
 
+public function edit($id) {
+    $sala = Salas::findOrFail($id);
+
+    return view('salas.edit', ['sala' => $sala]);
+}
+
+public function update(Request $request, $id)
+{
+    $sala = Salas::findOrFail($id);
+
+    $data = $request->all();
+
+    if ($request->has('itens')) {
+        $data['itens'] = implode(',', $request->itens);
+    }
+
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+        $requestImage = $request->file('image');
+        $extension = $requestImage->extension();
+
+        $imageName = md5(
+            $requestImage->getClientOriginalName() . strtotime("now")
+        ) . "." . $extension;
+
+        $requestImage->move(public_path('img/salas'), $imageName);
+
+        $data['image'] = $imageName;
+    }
+
+    $sala->update($data);
+
+    return redirect('/dashboard')->with('msg', 'Sala editada com sucesso!');
+}
 
 }
