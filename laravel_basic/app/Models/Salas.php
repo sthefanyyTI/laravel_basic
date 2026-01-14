@@ -17,6 +17,8 @@ class Salas extends Model
         'description',
         'image',
         'itens',
+        'date',
+        'user_id',
     ];
 
     protected $casts = [

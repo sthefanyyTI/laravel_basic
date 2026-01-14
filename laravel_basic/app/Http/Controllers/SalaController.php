@@ -43,7 +43,12 @@ public function index()
     $sala->date = $request->date;
     $sala->qty = $request->qty;
     $sala->description = $request->description ?: '';
-    $sala->itens = $request->itens;
+
+    if ($request->has('itens')) {
+
+        $sala->itens = implode(',', $request->itens);
+        
+    }
 
 
     // upload da imagem
@@ -76,7 +81,7 @@ public function show(int $id){
     
     $sala = Salas::findOrFail($id);
 
-    $sala->items = explode(',', $sala->items); // Transforma a string em um array
+    $sala->itens = explode(',', $sala->itens); // Transforma a string em um array
 
     return view('salas.show', ['sala' => $sala]);
 
@@ -98,6 +103,8 @@ public function destroy($id) {
 
 public function edit($id) {
     $sala = Salas::findOrFail($id);
+
+    $sala->itens = explode(',', $sala->itens);
 
     return view('salas.edit', ['sala' => $sala]);
 }

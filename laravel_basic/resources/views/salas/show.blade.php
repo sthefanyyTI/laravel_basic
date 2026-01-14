@@ -14,8 +14,8 @@
                 <a href="#" class="btn btn-primary" id="sala-submit">Confirmar Presença</a>
                 <h3>A sala possui:</h3>
                 <ul id="itens-list">
-                    @if (!empty($sala->items))
-                        @foreach ($sala->items as $item)
+                    @if (!empty($sala->itens))
+                        @foreach ($sala->itens as $item)
                             <li><ion-icon name="play-outline"></ion-icon> {{ $item }} </li>
                         @endforeach
                     @else

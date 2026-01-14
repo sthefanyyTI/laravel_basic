@@ -35,22 +35,22 @@
 
         <div class="form-group">
             <label for="description">Descrição:</label>
-            <textarea name="description" id="description" class="form-control" placeholder="Descrição da sala"></textarea>
+            <textarea name="description" id="description" class="form-control" placeholder="Descrição da sala">{{$sala->description}}</textarea>
         </div>
 
         <div class="form-group">
             <label for="title">Itens da sala:</label>
             <div class="form-group">
-                <input type="checkbox" name="itens[]" id="Cadeiras">Cadeiras
+                <input type="checkbox" name="itens[]" id="Cadeiras" value="Cadeiras" {{ in_array('Cadeiras', $sala->itens) ? 'checked' : '' }}>Cadeiras
             </div>
             <div class="form-group">
-                <input type="checkbox" name="itens[]" id="Canetas">Canetas
+                <input type="checkbox" name="itens[]" id="Canetas" value="Canetas" {{ in_array('Canetas', $sala->itens) ? 'checked' : '' }}>Canetas
             </div>
             <div class="form-group">
-                <input type="checkbox" name="itens[]" id="Atividade">Atividade
+                <input type="checkbox" name="itens[]" id="Atividade" value="Atividade" {{ in_array('Atividade', $sala->itens) ? 'checked' : '' }}>Atividade
             </div>
             <div class="form-group">
-                <input type="checkbox" name="itens[]" id="Som">Som
+                <input type="checkbox" name="itens[]" id="Som" value="Som" {{ in_array('Som', $sala->itens) ? 'checked' : '' }}>Som
             </div>
         </div>
 
