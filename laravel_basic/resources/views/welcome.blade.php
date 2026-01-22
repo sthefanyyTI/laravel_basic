@@ -28,6 +28,7 @@
                 <div class="card-body">
                     <p class="card-date">{{ date('d/m/y', strtotime($sala->date)) }}</p>
                     <h5 class="card-sala">{{ $sala->name }}</h5>
+                    <p class="card-participantes"> {{ count($sala->users) }} Participantes </p>
                     <a href="/salas/{{ $sala->id }}" class="btn btn-primary">Saber mais</a>
                 </div>
             </div>

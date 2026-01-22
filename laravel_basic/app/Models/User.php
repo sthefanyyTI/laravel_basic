@@ -69,4 +69,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Salas');
     }
 
+    // public function salasAsParticipantes() {
+    //     return $this->belongsToMany('App\Models\Salas');
+    // }
+    public function salasAsParticipantes() {
+        return $this->belongsToMany(
+        Salas::class,
+        'salas_user', 
+        'user_id',   
+        'sala_id'     
+        );
+    }
+
 }

@@ -10,8 +10,16 @@
             <div id="info-container" class="col-md-6">
                 <h1>{{ $sala->name }}</h1>
                 <p class="sala-qty">Quantidade: {{ $sala->qty }}</p>
+                <p class="sala-description">Participantes: {{ $sala->users()->count() }}</p>
                 <p class="sala-description">Descrição: {{ $sala->description }}</p>
-                <a href="#" class="btn btn-primary" id="sala-submit">Confirmar Presença</a>
+                <form action="/salas/join/{{ $sala->id }}" method="POST">
+                    @csrf
+                    <a href="/salas/join/{{ $sala->id }}" 
+                        class="btn btn-primary" 
+                        id="sala-submit"
+                        onclick="event.preventDefault(); this.closest('form').submit();">Entrar na sala
+                    </a>
+                </form>
                 <h3>A sala possui:</h3>
                 <ul id="itens-list">
                     @if (!empty($sala->itens))

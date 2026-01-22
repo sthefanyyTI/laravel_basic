@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Salas;
 
-class SalaController extends Controller
-{
+class SalaController extends Controller {
 
-public function index()
-{
+public function index() {
     $search = request('search');
 
     if ($search) {
@@ -28,10 +26,7 @@ public function index()
     ]);
 }
 
-
-
-
-    public function create(){
+    public function create() {
         return view('salas.create');
     }
 
@@ -77,7 +72,7 @@ public function index()
 }
 
 
-public function show(int $id){
+public function show(int $id) {
     
     $sala = Salas::findOrFail($id);
 
@@ -109,8 +104,7 @@ public function edit($id) {
     return view('salas.edit', ['sala' => $sala]);
 }
 
-public function update(Request $request, $id)
-{
+public function update(Request $request, $id) {
     $sala = Salas::findOrFail($id);
 
     $data = $request->all();
@@ -137,5 +131,16 @@ public function update(Request $request, $id)
 
     return redirect('/dashboard')->with('msg', 'Sala editada com sucesso!');
 }
+
+    public function joinSala($id) {
+
+        $user = auth()->user(); 
+
+        $user->salasAsParticipantes()->attach($id);
+
+        $sala = Salas::findOrFail($id);
+        
+        return redirect('/dashboard')->with('msg', 'Você entrou na sala ' . $sala->name);
+    }
 
 }

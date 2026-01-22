@@ -19,9 +19,10 @@ Route::delete('/salas/{id}', [SalaController::class, 'destroy'])->middleware('au
 
 Route::put('/salas/{id}', [SalaController::class, 'update'])->name('salas.update');
 
+Route::post('/salas/join/{id}', [SalaController::class, 'joinSala'])->middleware('auth');
+
 Route::get('/contatos', function () {
     return view('contact');
 });
 
 Route::get('/dashboard', [SalaController::class, 'dashboard'])->middleware('auth');
-
