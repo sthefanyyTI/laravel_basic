@@ -14,7 +14,7 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>Pessoas</th>
+                <th>Participantes</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -25,7 +25,7 @@
                 <td>
                     <a href="/salas/{{ $sala->id }}">{{ $sala->name }}</a>
                 </td>
-                <td>0</td>
+                <td>{{ $sala->users()->count() }}</td>
                 <td>
                     <a href="/salas/edit/{{ $sala->id }}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon>Editar</a>
                     <form action="/salas/{{ $sala->id }}" method="POST">
@@ -43,7 +43,43 @@
             <a href="/salas/create">Criar uma sala</a>
         </p>
     @endif
+</div>
+
+<div class="col-md-10 offset-md-1 dashboard-title-container">
+    <h1>Salas que estou participando</h1>
+</div>
+
+<div class="col-md-10 offset-md-1 dashboard-salas-container">
+    @if(count($salasAsParticipantes) > 0)
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Participantes</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($salasAsParticipantes as $sala)
+            <tr>
+                <td>{{ $loop->index + 1 }}</td>
+                <td>
+                    <a href="/salas/{{ $sala->id }}">{{ $sala->name }}</a>
+                </td>
+                <td>{{ $sala->users()->count() }}</td>
+                <td>
+                    <a href="#">Sair da Sala</a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+        <p>Você não está em nenhuma sala. -
+            <a href="/">Veja todas as salas</a>
+        </p>
+    @endif
 
 </div>
 @endsection
-

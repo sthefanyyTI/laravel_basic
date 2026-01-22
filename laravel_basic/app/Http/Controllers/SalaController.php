@@ -72,37 +72,48 @@ public function index() {
 }
 
 
-public function show(int $id) {
+    public function show(int $id) {
     
-    $sala = Salas::findOrFail($id);
+        $sala = Salas::findOrFail($id);
 
-    $sala->itens = explode(',', $sala->itens); // Transforma a string em um array
+        $sala->itens = explode(',', $sala->itens); // Transforma a string em um array
 
-    return view('salas.show', ['sala' => $sala]);
+        return view('salas.show', ['sala' => $sala]);
+    }
 
-}
+    public function dashboard() {
 
-public function dashboard() {
-    $user = auth()->user();
-    $salas = $user->salas;
+        $user = auth()->user();
 
-    return view('salas.dashboard', ['salas' => $salas]);
-}
+        $salas = $user->salas;
 
-public function destroy($id) {
+        $salasAsParticipantes = $user->salasAsParticipantes;
 
-    Salas::findOrFail($id)->delete();
+        return view('salas.dashboard', 
+            ['salas' => $salas, 'salasAsParticipantes' => $salasAsParticipantes]);
+    }   
 
-    return redirect('/dashboard')->with('msg', 'Sala excluída com sucesso!');
-}
+    public function destroy($id) {
 
-public function edit($id) {
-    $sala = Salas::findOrFail($id);
+        Salas::findOrFail($id)->delete();
 
-    $sala->itens = explode(',', $sala->itens);
+        return redirect('/dashboard')->with('msg', 'Sala excluída com sucesso!');
+    }
 
-    return view('salas.edit', ['sala' => $sala]);
-}
+    public function edit($id) {
+
+        $user = auth()->user();
+
+        $sala = Salas::findOrFail($id);
+
+        if($user->id != $sala->user_id) {
+            return redirect('/dashboard');
+        }
+
+        $sala->itens = explode(',', $sala->itens);
+
+        return view('salas.edit', ['sala' => $sala]);
+    }
 
 public function update(Request $request, $id) {
     $sala = Salas::findOrFail($id);
