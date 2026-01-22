@@ -12,14 +12,27 @@
                 <p class="sala-qty">Quantidade: {{ $sala->qty }}</p>
                 <p class="sala-description">Participantes: {{ $sala->users()->count() }}</p>
                 <p class="sala-description">Descrição: {{ $sala->description }}</p>
-                <form action="/salas/join/{{ $sala->id }}" method="POST">
+                <!-- <form action="/salas/join/{{ $sala->id }}" method="POST">
                     @csrf
                     <a href="/salas/join/{{ $sala->id }}" 
                         class="btn btn-primary" 
                         id="sala-submit"
                         onclick="event.preventDefault(); this.closest('form').submit();">Entrar na sala
                     </a>
-                </form>
+                </form> -->
+                @if(!$hasUserJoined)
+                    <form action="/salas/leave/{{ $sala->id }}" method="POST">
+                        @csrf
+                        <a href="/salas/join/{{ $sala->id }}" 
+                        class="btn btn-primary" 
+                        id="sala-submit"
+                        onclick="event.preventDefault(); this.closest('form').submit();">Entrar na sala
+                        </a>
+                    </form>
+                @else
+                    <p class="already-joined-msg">Você já está na sala.</p>
+                @endif
+
                 <h3>A sala possui:</h3>
                 <ul id="itens-list">
                     @if (!empty($sala->itens))

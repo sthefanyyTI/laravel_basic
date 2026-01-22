@@ -69,7 +69,14 @@
                 </td>
                 <td>{{ $sala->users()->count() }}</td>
                 <td>
-                    <a href="#">Sair da Sala</a>
+                    <form action="/salas/leave/{{ $sala->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn">
+                            <ion-icon name="trash-outline"></ion-icon>
+                            Sair da sala
+                        </button>
+                    </form>     
                 </td>
             </tr>
             @endforeach

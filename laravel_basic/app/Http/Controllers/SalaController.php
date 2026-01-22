@@ -76,9 +76,22 @@ public function index() {
     
         $sala = Salas::findOrFail($id);
 
+        $user = auth()->user();
+
+        $hasUserJoined = false;
+
+        if($user) {
+            $userSalas = $user->salasAsParticipantes->toArray();
+            foreach($userSalas as $userSalas) {
+                if($userSalas['id'] == $id) {
+                    $hasUserJoined = true;
+                }
+            }
+        }
+
         $sala->itens = explode(',', $sala->itens); // Transforma a string em um array
 
-        return view('salas.show', ['sala' => $sala]);
+        return view('salas.show', ['sala' => $sala, 'hasUserJoined' => $hasUserJoined]);
     }
 
     public function dashboard() {
@@ -152,6 +165,17 @@ public function update(Request $request, $id) {
         $sala = Salas::findOrFail($id);
         
         return redirect('/dashboard')->with('msg', 'Você entrou na sala ' . $sala->name);
+    }
+
+    public function leaveSala($id) {
+
+        $user = auth()->user();
+
+        $user->salasAsParticipantes()->detach($id);
+
+        $sala = Salas::findOrFail($id);
+        
+        return redirect('/dashboard')->with('msg', 'Você saiu da sala ' . $sala->name);
     }
 
 }
